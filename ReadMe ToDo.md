@@ -15,3 +15,5 @@ Done
 - Run a local explorer
   https://app.tryethernal.com/
 
+- set env 
+

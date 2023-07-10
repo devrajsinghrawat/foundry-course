@@ -1,0 +1,9 @@
+Commands
+- Testing 
+    forge test
+    forge test -vvv
+        - to get more details about the exeuction
+    forge test --fork-url $fork_rpc
+        - to execute the test cases on a specific network fork
+    forge coverage 
+        - to get the coverage for execution

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {console} from "forge-std/Script.sol";
-// import "../src/FundMe.sol";
+import { Script, console } from "forge-std/Script.sol";
+import { MockV3Aggregator } from "../test/mocks/MockV3Aggregator.sol";
 
 // Deploy mock Price feed contract or other dependent contracts, when we are on local chain
 // Keep track of contract addresses across chains
-contract HelperConfig {
+contract HelperConfig is Script {
 
 uint256 constant MAINNET = 1;
 uint256 constant SEPOLIA = 11155111;
@@ -49,13 +49,17 @@ function getSepoliaEthConfig() public pure returns (NetworkConfig memory) {
     return config;
 }
 
-function getAnvilEthConfig() public pure returns (NetworkConfig memory) {
+function getAnvilEthConfig() public returns (NetworkConfig memory) {
     // Check if the config exist
 
     // If not then deploy mock contract for price feed
-    
+    vm.startBroadcast();
+    // Deploy the mock 
+    MockV3Aggregator mock = new MockV3Aggregator(4, 2000);
+    vm.stopBroadcast();
+
     NetworkConfig memory config = NetworkConfig({priceFeed 
-    : 0x694AA1769357215DE4FAC081bf1f309aDC325306});
+    : address(mock)});
     return config;
 }
 

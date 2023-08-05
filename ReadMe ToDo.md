@@ -7,6 +7,11 @@ Setup For Local machine
 
 
 
+
+Imp Commands-
+- `forge test` to test the all test cases, you can use additional -v flag for verbocity, more v you ll add more verbose it will be.
+  - We can also add `--fork-url $RPC_FORK` which will execute the test case in that given network rpc context 
+
 ToDo 
 - Mock the Price Feed contract setup for local test case exeuction
 - Write a fund test case

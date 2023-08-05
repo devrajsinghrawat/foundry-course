@@ -55,7 +55,7 @@ function getAnvilEthConfig() public returns (NetworkConfig memory) {
     // If not then deploy mock contract for price feed
     vm.startBroadcast();
     // Deploy the mock 
-    MockV3Aggregator mock = new MockV3Aggregator(4, 2000);
+    MockV3Aggregator mock = new MockV3Aggregator(8, 2000);
     vm.stopBroadcast();
 
     NetworkConfig memory config = NetworkConfig({priceFeed 

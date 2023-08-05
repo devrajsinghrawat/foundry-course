@@ -3,6 +3,7 @@ pragma solidity ^0.8.18;
 
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import {PriceConverter} from "./PriceConverter.sol";
+import { console } from "forge-std/console.sol";
 
 error NotOwner();
 
@@ -17,6 +18,8 @@ contract FundMe {
     uint256 public constant MINIMUM_USD = 5 * 10 ** 18;
     AggregatorV3Interface private immutable s_priceFeed;
     
+    event FUNDED(address indexed sender, uint value);
+
     constructor(address _pricefeed) {
         i_owner = msg.sender;
         s_priceFeed = AggregatorV3Interface(_pricefeed);
@@ -27,6 +30,8 @@ contract FundMe {
         // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
+        console.log("Fund method received funds from: ",msg.sender, "with a value of: ", msg.value);
+        emit FUNDED(msg.sender, msg.value);
     }
     
     function getVersion() public view returns (uint256){

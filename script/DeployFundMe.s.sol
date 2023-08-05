@@ -9,7 +9,7 @@ contract DeployFundMe is Script {
     function run() public returns (FundMe) {
         // Before Broadcast - not a real tx
         HelperConfig helperConfig = new HelperConfig();
-        console.log("Deployed Helper address", address(helperConfig));
+        console.log(" --> DeployFundMe :: helperConfig address : ", address(helperConfig));
         (address ethUsdPriceFeed) = helperConfig.currentNetworkConfig();
         console.log("Helper ethUsdPriceFeed address", ethUsdPriceFeed);
 
@@ -18,6 +18,7 @@ contract DeployFundMe is Script {
         vm.startBroadcast();
         // Mock
         FundMe fundMe = new FundMe(ethUsdPriceFeed);
+        console.log(" --> DeployFundMe :: fundMe address : ", address(fundMe));
         vm.stopBroadcast();
         return fundMe;
     }

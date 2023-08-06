@@ -34,9 +34,10 @@ https://ethereum.stackexchange.com/questions/96685/how-to-use-address-call-in-so
 ToDo 
 
 - Write a fund test case
-  - Test emit event test
-  
-- 
+  - Test emit event test  (works when only event is included in the interface)
+  Track https://github.com/Cyfrin/foundry-full-course-f23/discussions/554
+
+- Follow further on test cases https://www.youtube.com/watch?v=IPgBsxL-SkE&list=PL2-Nvp2Kn0FPH2xU3IbKrrkae-VVXs1vk&index=94
 
 
 Done 

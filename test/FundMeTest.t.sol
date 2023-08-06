@@ -4,15 +4,32 @@ pragma solidity ^0.8.13;
 import {Test, console} from "forge-std/Test.sol";
 import {DeployFundMe, FundMe} from "../script/DeployFundMe.s.sol";
 import {Script} from "forge-std/Script.sol";
+import { IFundMe } from "./../Interfaces/IFundMe.sol";
 
-// import "../src/FundMe.sol";
+/** 
+  --> FundMeTest :: EoA address :  0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38
+  --> FundMeTest :: FundMeTest address :  0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496
+  --> FundMeTest :: deployer address :  0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f                <MIGHT CHANGE>
+  --> HelperConfig :: mock address :  0x90193C961A926261B756D1E5bb255e67ff9498A1                  <MIGHT CHANGE>
+  --> DeployFundMe :: helperConfig address :  0x104fBc016F4bb334D775a19E8A6510109AC63E00          <MIGHT CHANGE>
+  --> DeployFundMe :: fundMe address :  0xA8452Ec99ce0C64f20701dB7dD3abDb607c00496                <MIGHT CHANGE>
+*/
 
-contract FundMeTest is Test, Script {
+// interface IFundMe {
+//     event FUNDED(address indexed sender, uint value);
+// }
+
+contract FundMeTest is Test, Script, IFundMe {
     FundMe fundMe;
-
+    
+    address Tester = makeAddr("testuser"); 
+    
     uint256 constant MINIMUM_USD = 5e18;
+    uint256 constant SEND_VALUE = 1 ether;     // 1000000000000000000 .i.e 1e18
+    uint256 constant INITIAL_BALANCE = 10 ether;     // 1000000000000000000 .i.e 1e18
 
     function setUp() external {
+        deal(Tester, INITIAL_BALANCE);
         console.log(" --> FundMeTest :: EoA address : ", msg.sender);
         console.log(" --> FundMeTest :: FundMeTest address : ", address(this));
         DeployFundMe deployer = new DeployFundMe();
@@ -49,7 +66,16 @@ contract FundMeTest is Test, Script {
     }
 
     function testFundSucessWithEnoughEth() public {
+    // Fund method SHOULD received funds value of:  1000000000000000000 (1 ETH) 
+    // from: 0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496 (.i.e. address(this)).
         vm.expectEmit();
-        fundMe.fund{value: 1 ether}();
+        emit IFundMe.FUNDED(address(this), SEND_VALUE);
+        fundMe.fund{value: SEND_VALUE}();
+    }
+
+    function testFunderBalance() public {
+        vm.prank(Tester);
+        fundMe.fund{value: SEND_VALUE}();
+        assertEq(fundMe.getAddressToAmount(Tester), SEND_VALUE);
     }
 }

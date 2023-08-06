@@ -23,10 +23,20 @@ Ref https://github.com/Cyfrin/foundry-full-course-f23/discussions/211 https://bo
 Ref:- https://ethereum.stackexchange.com/questions/144991/why-is-my-foundry-test-contract-not-deploying-to-the-0xb4c79dab8f259c7aee6e5b2aa
 
 
+Off-Note
+1 - How do we pass from option in Web3
+https://ethereum.stackexchange.com/questions/34234/how-to-pass-a-parameter-to-a-function-in-web3
+
+2. This does not work in foundry test as when I tried to avoid prank and was passing a {from: 0xTester} option then  the compiler mentioned that we can only pass {value, gas and salt} as call options 
+https://ethereum.stackexchange.com/questions/96685/how-to-use-address-call-in-solidity
+
+
 ToDo 
-- Mock the Price Feed contract setup for local test case exeuction
+
 - Write a fund test case
   - Test emit event test
+  
+- 
 
 
 Done 
@@ -38,5 +48,6 @@ Done
   https://app.tryethernal.com/
 
 - Set Env in Shell
-
 - Helper scrip for Default network selection
+- Mock the Price Feed contract setup for local test case exeuction
+- Check Response on https://github.com/Cyfrin/foundry-full-course-f23/discussions/548

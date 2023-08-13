@@ -9,6 +9,9 @@ Setup For Local machine
 
 
 Imp Commands and Point -
+
+- We can analysis the contract storage (local or ether scan one) using `cast storage` command 
+- We need to deploy our contract locally using `forge script script/DeployFundMe.s.sol --rpc-url $RPC_LOCAL --private-key $PK_LOCAL --broadcast` command
 - `forge test` to test the all test cases, 
       - you can use additional -v flag for verbocity, more v you ll add more verbose it will be.
       - We can also add `--fork-url $RPC_FORK` which will execute the test case in that given network rpc context
@@ -39,6 +42,9 @@ ToDo
 
 - Follow further on test cases https://www.youtube.com/watch?v=IPgBsxL-SkE&list=PL2-Nvp2Kn0FPH2xU3IbKrrkae-VVXs1vk&index=94
 
+
+- OT Check Frontrun using SF-Eth https://www.youtube.com/watch?v=ntf4tzjhFUQ
+- OT Check Dex Concept https://www.youtube.com/watch?v=7dkTNlaM2co
 
 Done 
 - Run the local chain Anvil

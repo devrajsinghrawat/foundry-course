@@ -23,6 +23,7 @@ contract FundMeTest is Test, Script, IFundMe {
     uint256 constant MINIMUM_USD = 5e18;
     uint256 constant SEND_VALUE = 1 ether; // 1000000000000000000 .i.e 1e18
     uint256 constant INITIAL_BALANCE = 10 ether; // 1000000000000000000 .i.e 1e18
+    uint256 constant GAS_PRICE = 1;
 
     function setUp() external {
         deal(Tester, INITIAL_BALANCE);
@@ -102,8 +103,14 @@ contract FundMeTest is Test, Script, IFundMe {
         console.log("fundContractStatringBalance : ", fundContractStatringBalance);
 
         // Act
+        uint256 startGas = gasleft();
+        console.log("Start Gas :", startGas);
+        vm.txGasPrice(GAS_PRICE);
         vm.prank(fundMe.i_owner());
         fundMe.withdraw();
+        uint256 endGas = gasleft();
+        console.log("End Gas :", endGas);
+        console.log("Gas Used :", startGas - endGas);
 
         // Assert
         uint256 ownerClosingBalance = fundMe.i_owner().balance;
